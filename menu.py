@@ -6,15 +6,21 @@ from PyQt5.QtGui import *
 import sys
 
 
-class MyWindow(QDialog):
+class Main(QDialog):
     def __init__(self):
-        super(MyWindow,self).__init__()
+        super(Main,self).__init__()
         loadUi("mainScreen.ui",self)
+
+class imageSelect(QDialog):
+    def __init__(self):
+        super(imageSelect,self).__init__()
+        loadUi("imageSelect.ui",self)
 
 def window():
     app = QApplication(sys.argv)
-    win = MyWindow()
+    win = imageSelect()
     win.show()
     sys.exit(app.exec_())
+    
 
 window()
