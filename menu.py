@@ -10,17 +10,24 @@ class Main(QDialog):
     def __init__(self):
         super(Main,self).__init__()
         loadUi("mainScreen.ui",self)
+        self.pushButton.clicked.connect(self.goToImageSelect)
+        self.pushButton_2.clicked.connect(self.goToImageSelect)
+    def goToImageSelect(self):
+        #imageSelect2=imageSelect()
+        widget.setCurrentIndex(widget.currentIndex()+1)
 
 class imageSelect(QDialog):
     def __init__(self):
         super(imageSelect,self).__init__()
         loadUi("imageSelect.ui",self)
 
-def window():
-    app = QApplication(sys.argv)
-    win = imageSelect()
-    win.show()
-    sys.exit(app.exec_())
-    
+app = QApplication(sys.argv)
+widget=QtWidgets.QStackedWidget()
+main = Main()
+imageS = imageSelect()
+widget.addWidget(main)
+widget.addWidget(imageS)
+widget.show()
 
-window()
+#main.show()
+sys.exit(app.exec_())
