@@ -26,9 +26,14 @@ class imageSelect(QDialog):
         loadUi("imageSelect.ui",self)
         self.back_button.clicked.connect(self.goMain)
         self.browse_button.clicked.connect(self.browsefiles)
+        self.imageButtonReady.clicked.connect(self.manipulateImage)
     def browsefiles(self):
         filename = QFileDialog.getOpenFileName(self, 'Open File', '', 'Images (*.png, *.xmp, *.jpg)')
         self.browse_textbox.setText(filename[0])
+        
+    def manipulateImage(self):
+        img = cv2.imread(self.browse_textbox.text(), 1)
+        cv2.imshow('Face Detector', img)
     def goMain(self):
         widget.setCurrentIndex(widget.currentIndex()-1)
 
@@ -37,6 +42,7 @@ class cameraSelect(QDialog):
         super(cameraSelect,self).__init__()
         loadUi("cameraSelect.ui",self)
         self.cameraButtonReady.clicked.connect(self.startCamera)
+        self.back_button.clicked.connect(self.goMain)
     def startCamera(self):
         cap = cv2.VideoCapture(0)
 
@@ -48,7 +54,11 @@ class cameraSelect(QDialog):
                 break
         cap.release()
         cv2.destroyAllWindows()
+    def goMain(self):
+        widget.setCurrentIndex(widget.currentIndex()-2)
 
+
+#Main
 app = QApplication(sys.argv)
 widget=QtWidgets.QStackedWidget()
 main = Main()
