@@ -1,5 +1,5 @@
 from PyQt5 import QtWidgets
-from PyQt5.QtWidgets import QApplication, QDialog
+from PyQt5.QtWidgets import QApplication, QDialog, QFileDialog
 from PyQt5.uic import loadUi 
 from PyQt5.QtGui import *
 import cv2
@@ -25,6 +25,10 @@ class imageSelect(QDialog):
         super(imageSelect,self).__init__()
         loadUi("imageSelect.ui",self)
         self.back_button.clicked.connect(self.goMain)
+        self.browse_button.clicked.connect(self.browsefiles)
+    def browsefiles(self):
+        filename = QFileDialog.getOpenFileName(self, 'Open File', '', 'Images (*.png, *.xmp, *.jpg)')
+        self.browse_textbox.setText(filename[0])
     def goMain(self):
         widget.setCurrentIndex(widget.currentIndex()-1)
 
