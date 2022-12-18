@@ -25,7 +25,7 @@
   <property name="windowTitle">
    <string>Tracker</string>
   </property>
-  <widget class="QPushButton" name="pushButton">
+  <widget class="QPushButton" name="image_button">
    <property name="geometry">
     <rect>
      <x>20</x>
@@ -38,7 +38,7 @@
     <string>Image Tracking</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_2">
+  <widget class="QPushButton" name="camera_button">
    <property name="geometry">
     <rect>
      <x>20</x>

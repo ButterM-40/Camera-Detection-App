@@ -104,30 +104,30 @@
     </size>
    </property>
   </widget>
-  <widget class="QPushButton" name="imageButtonReady">
+  <widget class="QPushButton" name="cameraButtonReady">
    <property name="geometry">
     <rect>
-     <x>270</x>
-     <y>90</y>
+     <x>170</x>
+     <y>70</y>
      <width>71</width>
      <height>31</height>
     </rect>
    </property>
    <property name="text">
-    <string>Ready</string>
+    <string>Start</string>
    </property>
   </widget>
   <widget class="QLabel" name="select_label">
    <property name="geometry">
     <rect>
      <x>170</x>
-     <y>-10</y>
+     <y>20</y>
      <width>91</width>
      <height>51</height>
     </rect>
    </property>
    <property name="text">
-    <string>Select the Image</string>
+    <string>Start Camera</string>
    </property>
   </widget>
   <widget class="QLabel" name="select_attri_label">
@@ -141,29 +141,6 @@
    </property>
    <property name="text">
     <string>Select Attributes to look for:</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="browse_button">
-   <property name="geometry">
-    <rect>
-     <x>300</x>
-     <y>30</y>
-     <width>75</width>
-     <height>23</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Browse</string>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="browse_textbox">
-   <property name="geometry">
-    <rect>
-     <x>170</x>
-     <y>30</y>
-     <width>113</width>
-     <height>20</height>
-    </rect>
    </property>
   </widget>
   <widget class="QPushButton" name="back_button">
