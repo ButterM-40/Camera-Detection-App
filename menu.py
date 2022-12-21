@@ -48,7 +48,7 @@ class cameraSelect(QDialog):
 
         while True:
             ret, frame = cap.read()
-            cv2.imshow('frame', frame)
+            cv2.imshow('Camera', frame)
 
             if cv2.waitKey(1) == ord('q'):
                 break
