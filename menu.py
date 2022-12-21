@@ -3,6 +3,7 @@ from PyQt5.QtWidgets import QApplication, QDialog, QFileDialog
 from PyQt5.uic import loadUi 
 from PyQt5.QtGui import *
 import cv2
+#import matplotlib.pyplot as plt
 
 import sys
 
@@ -33,7 +34,26 @@ class imageSelect(QDialog):
         
     def manipulateImage(self):
         img = cv2.imread(self.browse_textbox.text(), 1)
+        #cv2.imshow('Face Detector', img)
+        #plt.imshow(img)
+        #load cascade
+        face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
+
+        # Convert to grayscale
+        #gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+
+        # Detect Faces
+        faces = face_cascade.detectMultiScale(img, 1.1, 4)
+
+        # Draw rectangle around faces
+        for(x,y,w,h) in faces: 
+            cv2.rectangle(img, (x,y), (x+w, y+h), (255,0,0),2)
+
+        # display output
         cv2.imshow('Face Detector', img)
+        cv2.waitKey()
+
+            
     def goMain(self):
         widget.setCurrentIndex(widget.currentIndex()-1)
 
