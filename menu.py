@@ -37,13 +37,13 @@ class imageSelect(QDialog):
         #cv2.imshow('Face Detector', img)
         #plt.imshow(img)
         #load cascade
-        face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
-
-        # Convert to grayscale
-        #gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+        face_cascade = cv2.CascadeClassifier('data/haarcascade_frontalface_default.xml')
+        body_cascade = cv2.CascadeClassifier('data/haarcascade_upperbody.xml')
+        smile_cascade = cv2.CascadeClassifier('data/haarcascade_smile.xml')
+        eye_cascade = cv2.CascadeClassifier('data/haarcascade_eye_tree_eyeglasses.xml')
 
         # Detect Faces
-        faces = face_cascade.detectMultiScale(img, 1.1, 4)
+        faces = eye_cascade.detectMultiScale(img, 1.1, 4)
 
         # Draw rectangle around faces
         for(x,y,w,h) in faces: 
@@ -66,9 +66,47 @@ class cameraSelect(QDialog):
     def startCamera(self):
         cap = cv2.VideoCapture(0)
 
+        def frameDetectionList(frame):
+            #SetUp Detection
+            trained_face_data = cv2.CascadeClassifier('data/haarcascade_frontalface_default.xml')
+            trained_body_data = cv2.CascadeClassifier('data/haarcascade_upperbody.xml')
+            trained_smile_data = cv2.CascadeClassifier('data/haarcascade_smile.xml')
+            trained_eye_data = cv2.CascadeClassifier('data/haarcascade_eye_tree_eyeglasses.xml')
+
+            #SetUp Frame
+            frame_gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+            frame_gray = cv2.equalizeHist(frame_gray)
+            #Detect Face
+            # Detect faces
+            face_coordinates = trained_face_data.detectMultiScale2(frame, 1.1, 4)
+            body_coordinates = trained_body_data.detectMultiScale2(frame, 1.1, 4)
+            smile_coordinates = trained_smile_data.detectMultiScale2(frame, 1.1, 4)
+            eye_coordinates = trained_eye_data.detectMultiScale2(frame, 1.1, 4)
+
+            #Detect Face
+            for(x,y,w,h) in face_coordinates[0]:
+                center = (x+w//2, y+h//2)
+                frame = cv2.rectangle(frame, (x,y), (x+w, y+h), (255,0,0),2)
+            #Detect Body
+            #for(x,y,w,h) in body_coordinates[0]:
+            #    center = (x+w//2, y+h//2)
+            #    frame = cv2.rectangle(frame, (x,y), (x+w, y+h), (255,0,0),2)
+            #Detect Smile
+            #for(x,y,w,h) in smile_coordinates[0]:
+            #    center = (x+w//2, y+h//2)
+            #    frame = cv2.rectangle(frame, (x,y), (x+w, y+h), (255,0,0),2)
+            #Detect Eyes
+            for(x,y,w,h) in eye_coordinates[0]:
+                center = (x+w//2, y+h//2)
+                frame = cv2.rectangle(frame, (x,y), (x+w, y+h), (255,0,0),2)
+            cv2.imshow('Capture - Face detection', frame)
+
         while True:
             ret, frame = cap.read()
-            cv2.imshow('Camera', frame)
+
+            frameDetectionList(frame)
+
+            #cv2.imshow('frame', frame)
 
             if cv2.waitKey(1) == ord('q'):
                 break
